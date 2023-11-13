@@ -1,0 +1,166 @@
+[gd_scene load_steps=14 format=3 uid="uid://b83f03aalsfgn"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_jvecg"]
+[ext_resource type="Texture2D" uid="uid://dlb8ugo8qx0g3" path="res://Assets/Card_Back-88x124_transparent_bg.png" id="2_okvoj"]
+[ext_resource type="Texture2D" uid="uid://cvkgseao8lo2v" path="res://Assets/trash_icon.png" id="3_jwxur"]
+[ext_resource type="Texture2D" uid="uid://bb8bty102e746" path="res://Assets/use_icon.png" id="4_ds7un"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="5_ondsm"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/idle_state.gd" id="6_2wdue"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Player/player_turn_state.gd" id="7_byrro"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/end_turn_state.gd" id="7_qqtqf"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Player/player_draw_two_state.gd" id="8_kdprq"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Player/player_swap_state.gd" id="9_iq65y"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Player/player_peek_state.gd" id="10_jy8j6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u7xf1"]
+size = Vector2(92, 125.333)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jlwe7"]
+radius = 70.695
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_jvecg")
+
+[node name="Card1" type="Sprite2D" parent="."]
+position = Vector2(270, 512)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_okvoj")
+centered = false
+
+[node name="Card1Detector" type="Area2D" parent="Card1"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Card1/Card1Detector"]
+position = Vector2(44, 61.3333)
+shape = SubResource("RectangleShape2D_u7xf1")
+
+[node name="Card2" type="Sprite2D" parent="."]
+position = Vector2(422, 512)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_okvoj")
+centered = false
+
+[node name="Card2Detector" type="Area2D" parent="Card2"]
+position = Vector2(-101.333, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Card2/Card2Detector"]
+position = Vector2(145.333, 61.3333)
+shape = SubResource("RectangleShape2D_u7xf1")
+
+[node name="Card3" type="Sprite2D" parent="."]
+position = Vector2(574, 512)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_okvoj")
+centered = false
+
+[node name="Card3Detector" type="Area2D" parent="Card3"]
+position = Vector2(-202.667, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Card3/Card3Detector"]
+position = Vector2(246.667, 61.3333)
+shape = SubResource("RectangleShape2D_u7xf1")
+
+[node name="Card4" type="Sprite2D" parent="."]
+position = Vector2(726, 512)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_okvoj")
+centered = false
+
+[node name="Card4Detector" type="Area2D" parent="Card4"]
+position = Vector2(-304, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Card4/Card4Detector"]
+position = Vector2(348, 61.3333)
+shape = SubResource("RectangleShape2D_u7xf1")
+
+[node name="Card5" type="Sprite2D" parent="."]
+position = Vector2(878, 512)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_okvoj")
+centered = false
+
+[node name="Card5Detector" type="Area2D" parent="Card5"]
+position = Vector2(-405.333, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Card5/Card5Detector"]
+position = Vector2(449.333, 61.3333)
+shape = SubResource("RectangleShape2D_u7xf1")
+
+[node name="TrashIcon" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="TrashIcon"]
+position = Vector2(282, 132)
+texture = ExtResource("3_jwxur")
+
+[node name="CardDetector" type="Area2D" parent="TrashIcon"]
+position = Vector2(270, 512)
+scale = Vector2(1.5, 1.5)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrashIcon/CardDetector"]
+position = Vector2(8.00003, -254)
+shape = SubResource("CircleShape2D_jlwe7")
+
+[node name="UseIcon" type="Node2D" parent="."]
+position = Vector2(738, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="UseIcon"]
+position = Vector2(282, 132)
+texture = ExtResource("4_ds7un")
+
+[node name="CardDetector" type="Area2D" parent="UseIcon"]
+position = Vector2(270, 512)
+scale = Vector2(1.5, 1.5)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UseIcon/CardDetector"]
+position = Vector2(8.00003, -254)
+shape = SubResource("CircleShape2D_jlwe7")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("5_ondsm")
+state = NodePath("PlayerIdleState")
+
+[node name="PlayerIdleState" type="Node" parent="StateMachine"]
+script = ExtResource("6_2wdue")
+
+[node name="PlayerTurnState" type="Node" parent="StateMachine"]
+script = ExtResource("7_byrro")
+
+[node name="PlayerDrawTwoState" type="Node" parent="StateMachine"]
+script = ExtResource("8_kdprq")
+
+[node name="PlayerSwapState" type="Node" parent="StateMachine"]
+script = ExtResource("9_iq65y")
+
+[node name="PlayerPeekState" type="Node" parent="StateMachine"]
+script = ExtResource("10_jy8j6")
+
+[node name="PlayerEndTurnState" type="Node" parent="StateMachine"]
+script = ExtResource("7_qqtqf")
+
+[connection signal="area_shape_entered" from="Card1/Card1Detector" to="." method="_on_card_1_detector_area_shape_entered"]
+[connection signal="area_shape_exited" from="Card1/Card1Detector" to="." method="_on_card_1_detector_area_shape_exited"]
+[connection signal="area_shape_entered" from="Card2/Card2Detector" to="." method="_on_card_2_detector_area_shape_entered"]
+[connection signal="area_shape_exited" from="Card2/Card2Detector" to="." method="_on_card_2_detector_area_shape_exited"]
+[connection signal="area_shape_entered" from="Card3/Card3Detector" to="." method="_on_card_3_detector_area_shape_entered"]
+[connection signal="area_shape_exited" from="Card3/Card3Detector" to="." method="_on_card_3_detector_area_shape_exited"]
+[connection signal="area_shape_entered" from="Card4/Card4Detector" to="." method="_on_card_4_detector_area_shape_entered"]
+[connection signal="area_shape_exited" from="Card4/Card4Detector" to="." method="_on_card_4_detector_area_shape_exited"]
+[connection signal="area_shape_entered" from="Card5/Card5Detector" to="." method="_on_card_5_detector_area_shape_entered"]
+[connection signal="area_shape_exited" from="Card5/Card5Detector" to="." method="_on_card_5_detector_area_shape_exited"]
+[connection signal="area_shape_entered" from="TrashIcon/CardDetector" to="." method="_on_trash_area_shape_entered"]
+[connection signal="area_shape_exited" from="TrashIcon/CardDetector" to="." method="_on_trash_area_shape_exited"]
+[connection signal="area_shape_entered" from="UseIcon/CardDetector" to="." method="_on_use_card_detector_area_shape_entered"]
+[connection signal="area_shape_exited" from="UseIcon/CardDetector" to="." method="_on_use_card_detector_area_shape_exited"]

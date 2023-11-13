@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://cprsrdxuxfxl7"]
+
+[ext_resource type="PackedScene" uid="uid://dm6q4pp44sjg0" path="res://Scenes/game_manager.tscn" id="1_6nkwa"]
+[ext_resource type="PackedScene" uid="uid://dyyog64bwj3to" path="res://Scenes/deck.tscn" id="1_ulp1x"]
+
+[node name="PlayingScreen" type="Node2D"]
+
+[node name="GameManager" parent="." instance=ExtResource("1_6nkwa")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.262745, 0.270588, 1)
+
+[node name="Deck" parent="." instance=ExtResource("1_ulp1x")]
+position = Vector2(1143, 664)
+
+[node name="Timer" type="ColorRect" parent="."]
+offset_left = 64.0
+offset_top = 562.0
+offset_right = 196.0
+offset_bottom = 659.0
+
+[node name="Label" type="Label" parent="Timer"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 33.0
+offset_right = 82.0
+offset_bottom = 59.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Timer"
+
+[connection signal="card_pulled" from="Deck" to="GameManager" method="_on_deck_card_pulled"]

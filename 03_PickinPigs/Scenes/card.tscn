@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://rv03wymdk6o4"]
+
+[ext_resource type="Script" path="res://Scripts/card.gd" id="1_q2cqt"]
+[ext_resource type="Texture2D" uid="uid://evkcbosnq4gf" path="res://Assets/cards/zero.png" id="2_57ul3"]
+[ext_resource type="Texture2D" uid="uid://kjmyv7rwkih4" path="res://Assets/not_pickable_icon.png" id="3_up82w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_leeek"]
+size = Vector2(220, 310)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysngt"]
+size = Vector2(7.6875, 177.25)
+
+[node name="Card" type="Node2D"]
+position = Vector2(640, 300)
+script = ExtResource("1_q2cqt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_57ul3")
+
+[node name="NotPickableIcon" type="Sprite2D" parent="Sprite2D"]
+texture = ExtResource("3_up82w")
+
+[node name="CardButton" type="TouchScreenButton" parent="."]
+shape = SubResource("RectangleShape2D_leeek")
+
+[node name="CollisionDetector" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
+shape = SubResource("RectangleShape2D_ysngt")
+
+[connection signal="pressed" from="CardButton" to="." method="_on_card_button_pressed"]
+[connection signal="released" from="CardButton" to="." method="_on_card_button_released"]

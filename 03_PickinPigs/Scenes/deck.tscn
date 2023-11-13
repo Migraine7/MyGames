@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyyog64bwj3to"]
+
+[ext_resource type="Script" path="res://Scripts/deck.gd" id="1_43gyb"]
+[ext_resource type="Texture2D" uid="uid://or3a6kgjvv2j" path="res://Assets/Card_Deck_Flat-212x122_transparent_bg.png" id="2_lt3ir"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_77oin"]
+points = PackedVector2Array(-20, 0, 110, -70, 20, -120, -110, -50)
+
+[node name="Deck" type="Node2D"]
+script = ExtResource("1_43gyb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -62)
+texture = ExtResource("2_lt3ir")
+
+[node name="DeckButton" type="TouchScreenButton" parent="."]
+shape = SubResource("ConvexPolygonShape2D_77oin")
+
+[connection signal="pressed" from="DeckButton" to="." method="_on_deck_button_pressed"]

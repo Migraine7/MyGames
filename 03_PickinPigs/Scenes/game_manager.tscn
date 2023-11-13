@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://dm6q4pp44sjg0"]
+
+[ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_tpkq5"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="2_ba7ih"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/GameManagerStates/start_game_state.gd" id="3_3y13i"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/GameManagerStates/player_state.gd" id="4_tnp6n"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/GameManagerStates/bot1_state.gd" id="5_chie2"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/GameManagerStates/bot2_state.gd" id="6_pbwwt"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/GameManagerStates/bot3_state.gd" id="7_gw8qg"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_tpkq5")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("2_ba7ih")
+state = NodePath("StartGameState")
+
+[node name="StartGameState" type="Node" parent="StateMachine"]
+script = ExtResource("3_3y13i")
+
+[node name="PlayerState" type="Node" parent="StateMachine"]
+script = ExtResource("4_tnp6n")
+
+[node name="Bot1State" type="Node" parent="StateMachine"]
+script = ExtResource("5_chie2")
+
+[node name="Bot2State" type="Node" parent="StateMachine"]
+script = ExtResource("6_pbwwt")
+
+[node name="Bot3State" type="Node" parent="StateMachine"]
+script = ExtResource("7_gw8qg")

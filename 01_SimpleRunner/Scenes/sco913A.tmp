@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://yyx8p00wwhyk"]
+
+[ext_resource type="Script" path="res://Scripts/World/score.gd" id="1_0alpx"]
+
+[node name="Score" type="CenterContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 8.0
+offset_bottom = 28.0
+grow_horizontal = 2
+script = ExtResource("1_0alpx")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Score:"
+
+[node name="ScoreNumberLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "0"

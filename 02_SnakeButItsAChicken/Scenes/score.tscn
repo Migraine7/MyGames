@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2ks26ybr5itb"]
+
+[ext_resource type="Script" path="res://Scripts/World/score.gd" id="1_k22pp"]
+[ext_resource type="FontFile" uid="uid://bsn0tarpjwwb6" path="res://Assets/Theme/HyperStiffRoundBootiedOpossumRegular-XjVd.ttf" id="1_q6jxc"]
+
+[node name="Score" type="HBoxContainer"]
+offset_left = 18.0
+offset_right = 93.0
+offset_bottom = 40.0
+script = ExtResource("1_k22pp")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_q6jxc")
+theme_override_font_sizes/font_size = 10
+text = "Score:"
+
+[node name="ScoreNumberLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_q6jxc")
+theme_override_font_sizes/font_size = 10
+text = "0"

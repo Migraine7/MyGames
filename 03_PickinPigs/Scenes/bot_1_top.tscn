@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://gmv2y5iy3xm6"]
+
+[ext_resource type="Script" path="res://Scripts/bot.gd" id="1_bnvpd"]
+[ext_resource type="Texture2D" uid="uid://dlb8ugo8qx0g3" path="res://Assets/Card_Back-88x124_transparent_bg.png" id="2_7iboh"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="3_ah65c"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/idle_state.gd" id="4_tc6uu"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Bot/bot_turn_state.gd" id="5_1is8i"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Bot/bot_draw_two_state.gd" id="5_k3gp4"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Bot/bot_peek_state.gd" id="6_ktcpf"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Bot/bot_swap_state.gd" id="8_f28p4"]
+
+[node name="Bot1" type="Node2D"]
+script = ExtResource("1_bnvpd")
+
+[node name="Card1" type="Sprite2D" parent="."]
+position = Vector2(420, -32)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_7iboh")
+centered = false
+flip_h = true
+flip_v = true
+
+[node name="Card2" type="Sprite2D" parent="."]
+position = Vector2(508, -32)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_7iboh")
+centered = false
+flip_h = true
+flip_v = true
+
+[node name="Card3" type="Sprite2D" parent="."]
+position = Vector2(596, -32)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_7iboh")
+centered = false
+flip_h = true
+flip_v = true
+
+[node name="Card4" type="Sprite2D" parent="."]
+position = Vector2(684, -32)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_7iboh")
+centered = false
+flip_h = true
+flip_v = true
+
+[node name="Card5" type="Sprite2D" parent="."]
+position = Vector2(772, -32)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_7iboh")
+centered = false
+flip_h = true
+flip_v = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("3_ah65c")
+state = NodePath("PlayerIdleState")
+
+[node name="PlayerIdleState" type="Node" parent="StateMachine"]
+script = ExtResource("4_tc6uu")
+
+[node name="BotPlayerTurnState" type="Node" parent="StateMachine"]
+script = ExtResource("5_1is8i")
+
+[node name="BotPlayerDrawTwoState" type="Node" parent="StateMachine"]
+script = ExtResource("5_k3gp4")
+
+[node name="BotPlayerPeekState" type="Node" parent="StateMachine"]
+script = ExtResource("6_ktcpf")
+
+[node name="BotPlayerSwapState" type="Node" parent="StateMachine"]
+script = ExtResource("8_f28p4")

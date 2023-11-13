@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://dl5ho4egqqthd"]
+
+[ext_resource type="Script" path="res://Scripts/egg.gd" id="1_3xirs"]
+[ext_resource type="Texture2D" uid="uid://m3xmyaowncg3" path="res://Assets/Egg/egg_18x18_shake.png" id="2_s48rh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bo1xe"]
+atlas = ExtResource("2_s48rh")
+region = Rect2(0, 0, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omk0e"]
+atlas = ExtResource("2_s48rh")
+region = Rect2(0, 18, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3r206"]
+atlas = ExtResource("2_s48rh")
+region = Rect2(0, 36, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ernmv"]
+atlas = ExtResource("2_s48rh")
+region = Rect2(0, 54, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b5gsu"]
+animations = [{
+"frames": [{
+"duration": 15.0,
+"texture": SubResource("AtlasTexture_bo1xe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_omk0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r206")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ernmv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnlo6"]
+size = Vector2(12, 14)
+
+[node name="Egg" type="StaticBody2D"]
+script = ExtResource("1_3xirs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
+sprite_frames = SubResource("SpriteFrames_b5gsu")
+animation = &"idle"
+frame_progress = 0.953601
+
+[node name="CollisionDetector" type="Area2D" parent="."]
+position = Vector2(0, -8)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
+shape = SubResource("RectangleShape2D_mnlo6")
+
+[node name="ShakeTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="area_entered" from="CollisionDetector" to="." method="_on_collision_detector_area_entered"]
+[connection signal="timeout" from="ShakeTimer" to="." method="_on_shake_timer_timeout"]
