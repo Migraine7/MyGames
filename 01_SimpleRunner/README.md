@@ -1,6 +1,7 @@
 # Simple Runner
 
 This is the first game in the series of a number of practice projects.
+It is a recreation of Chrome's offline Dino game.
 You can explore the code or try the game for yourself at: https://baranchik-7.itch.io/simple-runner
 
 ## Note
