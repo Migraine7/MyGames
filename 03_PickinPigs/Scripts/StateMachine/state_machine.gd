@@ -6,7 +6,7 @@ extends Node
 
 
 func _ready():
-	change_state(state)
+	state._enter_state()
 
 
 func change_state(new_state: State):

@@ -2,11 +2,18 @@ class_name BotPlayerDrawTwoState
 extends State
 
 
-# Called when the node enters the scene tree for the first time.
+@onready var state_machine = $".." as StateMachine
+@onready var bot_player_turn_state = $"../BotPlayerTurnState"
+
+
+
 func _ready():
-	pass # Replace with function body.
+	set_process(false)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _enter_state():
+	state_machine.change_state(bot_player_turn_state)
+
+
+func _exit_state():
 	pass

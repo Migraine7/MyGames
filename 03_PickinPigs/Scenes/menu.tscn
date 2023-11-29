@@ -1,0 +1,263 @@
+[gd_scene load_steps=20 format=3 uid="uid://c0d21swivmk0f"]
+
+[ext_resource type="Script" path="res://Scripts/menu.gd" id="1_cljuk"]
+[ext_resource type="Texture2D" uid="uid://tuo5x6pdqqy1" path="res://Assets/Background/Brown.png" id="1_ojooj"]
+[ext_resource type="Texture2D" uid="uid://cbm42g1tpqh0b" path="res://Assets/Background/Logo_without_pig.png" id="2_twhyn"]
+[ext_resource type="Texture2D" uid="uid://dtqmehgjiux4e" path="res://Assets/Cards/animals/AngryPig/Idle (36x30).png" id="3_hpfx5"]
+[ext_resource type="Texture2D" uid="uid://b6bey1eq4rwsa" path="res://Assets/HowTo/1.png" id="5_kkg8h"]
+[ext_resource type="Texture2D" uid="uid://bu5wi68tsb54o" path="res://Assets/Background/back_button.png" id="6_gkywu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5d6o"]
+atlas = ExtResource("3_hpfx5")
+region = Rect2(0, 0, 36, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65bvg"]
+atlas = ExtResource("3_hpfx5")
+region = Rect2(36, 0, 36, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50qb0"]
+atlas = ExtResource("3_hpfx5")
+region = Rect2(72, 0, 36, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2i6i6"]
+atlas = ExtResource("3_hpfx5")
+region = Rect2(108, 0, 36, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cg52w"]
+atlas = ExtResource("3_hpfx5")
+region = Rect2(144, 0, 36, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lutbr"]
+atlas = ExtResource("3_hpfx5")
+region = Rect2(180, 0, 36, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74mcf"]
+atlas = ExtResource("3_hpfx5")
+region = Rect2(216, 0, 36, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a13i0"]
+atlas = ExtResource("3_hpfx5")
+region = Rect2(252, 0, 36, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6q1rv"]
+atlas = ExtResource("3_hpfx5")
+region = Rect2(288, 0, 36, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ca2kw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5d6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65bvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50qb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2i6i6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cg52w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lutbr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74mcf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a13i0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6q1rv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 16.0
+}]
+
+[sub_resource type="Animation" id="Animation_hreqo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/FadeOut:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/FadeOut:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_odpfw"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/FadeOut:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/FadeOut:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_upto7"]
+_data = {
+"RESET": SubResource("Animation_hreqo"),
+"fade_out": SubResource("Animation_odpfw")
+}
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_cljuk")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ojooj")
+stretch_mode = 1
+
+[node name="Background" type="ColorRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.478431)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.262745, 0.270588, 1)
+
+[node name="Logo" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(640, 183)
+texture = ExtResource("2_twhyn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Logo"]
+position = Vector2(-153, -121)
+sprite_frames = SubResource("SpriteFrames_ca2kw")
+autoplay = "default"
+frame_progress = 0.496856
+flip_h = true
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 236.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+text = "START"
+
+[node name="HowToButton" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "HOW TO PLAY"
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "EXIT"
+
+[node name="FadeOut" type="ColorRect" parent="CanvasLayer"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HowToOverlay" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="HowToOverlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.921569)
+
+[node name="Sprite2D" type="Sprite2D" parent="HowToOverlay"]
+texture = ExtResource("5_kkg8h")
+centered = false
+
+[node name="NextButton" type="Button" parent="HowToOverlay"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = 941.0
+offset_top = 589.0
+offset_right = 1141.0
+offset_bottom = 639.0
+text = "NEXT"
+
+[node name="PreviousButton" type="Button" parent="HowToOverlay"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = 138.0
+offset_top = 589.0
+offset_right = 276.0
+offset_bottom = 631.0
+text = "PREVIOUS"
+
+[node name="BackButton" type="TextureButton" parent="HowToOverlay"]
+offset_left = 36.0
+offset_top = 12.0
+offset_right = 76.0
+offset_bottom = 52.0
+scale = Vector2(1.5, 1.5)
+texture_normal = ExtResource("6_gkywu")
+stretch_mode = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_upto7")
+}
+
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/HowToButton" to="." method="_on_how_to_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="HowToOverlay/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="HowToOverlay/PreviousButton" to="." method="_on_previous_button_pressed"]
+[connection signal="pressed" from="HowToOverlay/BackButton" to="." method="_on_back_button_pressed"]

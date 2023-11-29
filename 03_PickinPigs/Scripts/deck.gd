@@ -4,6 +4,10 @@ extends Node2D
 # Will keep a map with all the cards left
 # will randomly return a card that's left in the deck
 
+@onready var cards_left_label = $CardsLeftLabel
+@onready var animation_player = $AnimationPlayer
+
+
 @export var clickable : bool = true
 
 
@@ -12,6 +16,7 @@ signal card_pulled(card : GlobalVariables.Cards)
 
 
 var cards_dict = {}
+var deck_size : int
 
 
 func _init():
@@ -23,7 +28,7 @@ func initialize_cards_dict():
 	for i in range(10):
 		cards_dict[i] = 5
 	
-	# Nine cards of NINE
+	# Twelve cards of TEN
 	cards_dict[GlobalVariables.Cards.TEN] = 12
 	
 	# Four cards of each action card
@@ -31,15 +36,20 @@ func initialize_cards_dict():
 	cards_dict[GlobalVariables.Cards.SWAP] = 4
 	cards_dict[GlobalVariables.Cards.PEEK] = 4
 	
+	deck_size = get_deck_size()
+	
 	
 func get_card():
+	# Pop a random card from the deck
 	var available_cards = []
 	for key in cards_dict.keys():
-		if cards_dict[key] != 0:
+		for i in range(cards_dict[key]):
 			available_cards.append(key)
 			
 	var card = available_cards.pick_random()
 	cards_dict[card] -= 1
+	deck_size -= 1
+	cards_left_label.text = str(deck_size)
 	
 	return card
 	

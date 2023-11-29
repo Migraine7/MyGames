@@ -6,10 +6,10 @@ extends State
 
 
 func _enter_state():
-	var bot = game_manager.participants[3] as Bot
+	var bot = game_manager.participants[3]
 	bot.state_machine.change_state(bot.player_turn_state)
 	
 
 func _exit_state():
-	var bot = game_manager.participants[3] as Bot
+	var bot = game_manager.participants[3]
 	bot.state_machine.change_state(bot.player_idle_state)

@@ -1,19 +1,103 @@
-[gd_scene load_steps=4 format=3 uid="uid://dyyog64bwj3to"]
+[gd_scene load_steps=8 format=3 uid="uid://dyyog64bwj3to"]
 
 [ext_resource type="Script" path="res://Scripts/deck.gd" id="1_43gyb"]
-[ext_resource type="Texture2D" uid="uid://or3a6kgjvv2j" path="res://Assets/Card_Deck_Flat-212x122_transparent_bg.png" id="2_lt3ir"]
+[ext_resource type="Texture2D" uid="uid://5bv23qp0ek8g" path="res://Assets/Deck/deck_new.png" id="2_uq40b"]
+[ext_resource type="Texture2D" uid="uid://c8t6kpfisgj3e" path="res://Assets/Deck/deck_top_card_new.png" id="3_e4pay"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_77oin"]
 points = PackedVector2Array(-20, 0, 110, -70, 20, -120, -110, -50)
 
+[sub_resource type="Animation" id="Animation_xas3f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopCardSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, -64)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TopCardSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fpe3o"]
+resource_name = "pull_card"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopCardSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.4, 0.01),
+"update": 0,
+"values": [Vector2(1, -64), Vector2(-93, -17)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TopCardSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ok6o6"]
+_data = {
+"RESET": SubResource("Animation_xas3f"),
+"pull_card": SubResource("Animation_fpe3o")
+}
+
 [node name="Deck" type="Node2D"]
 script = ExtResource("1_43gyb")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="DeckSprite" type="Sprite2D" parent="."]
 position = Vector2(1, -62)
-texture = ExtResource("2_lt3ir")
+texture = ExtResource("2_uq40b")
+
+[node name="TopCardSprite" type="Sprite2D" parent="."]
+position = Vector2(1, -64)
+texture = ExtResource("3_e4pay")
 
 [node name="DeckButton" type="TouchScreenButton" parent="."]
 shape = SubResource("ConvexPolygonShape2D_77oin")
+
+[node name="CardsLeftLabel" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -95.0
+offset_right = 10.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ok6o6")
+}
 
 [connection signal="pressed" from="DeckButton" to="." method="_on_deck_button_pressed"]
